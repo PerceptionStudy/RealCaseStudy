@@ -8,25 +8,39 @@ public class MolObject : MonoBehaviour
 
 	public int type = -1;
 	public int timeout = -1;	
-	public int reactionId = -1;
+	public int reactionId = -1;	
+	public int reactionCat = -1;
 	public int reactionType = -1;
 
-	public bool isMoving = true;
 	public bool isFreezed = false;
-	public bool isReacting = false;
-		
-	private Color color;
+	public bool isReacting = false;	
+	public bool isBinding = false;
+
+	private bool isMoving = true;
+
+	private float drag;
+	public Color color;
 	private Vector3 randomVector;
 
 	// Use this for initialization
 	void Start ()
 	{
 		color = gameObject.GetComponent<MeshRenderer> ().material.color;
+		drag = rigidbody.drag;
 	}
 
 	void FixedUpdate() 
 	{
 		if (!isMoving || isFreezed) return;
+
+		if(!isBinding)
+		{
+			rigidbody.drag = drag * 2;
+		}
+		else
+		{
+			rigidbody.drag = drag;
+		}
 
 		randomVector = Random.insideUnitSphere;
 
@@ -84,8 +98,13 @@ public class MolObject : MonoBehaviour
 
 	public bool Timeout(int time)
 	{
-		timeout ++;
-		return (timeout > time);
+		if(timeout ++ >= time)
+		{	
+			timeout = 0;
+			return true;
+		}
+
+		return false;
 	}
 
 	public void MuteAnimation()
@@ -103,26 +122,21 @@ public class MolObject : MonoBehaviour
 		return reactionId != -1;
 	}
 
-	public void HighlightReaction()
+	public void HighlightColor()
 	{
 		gameObject.GetComponent<MeshRenderer> ().material.color = color + new Color(0.75f, 0.75f, 0.75f);
 	}
 
-	public void StartReaction()
+	public void RestoreColor()
 	{
-		isReacting = true;
-		timeout = 0;
+		gameObject.GetComponent<MeshRenderer> ().material.color = color;
 	}
 
 	public void EndReaction()
 	{
-		isReacting = false;
-
 		reactionType = -1;
 		reactionId = -1;
 		timeout = 0;
-
-		gameObject.GetComponent<MeshRenderer> ().material.color = color;
 	}
 
 //	void OnPreRender() 
