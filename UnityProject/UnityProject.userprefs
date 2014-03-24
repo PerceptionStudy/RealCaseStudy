@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MainScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MolObject.cs">
     <Files>
-      <File FileName="Assets\MainScript.cs" Line="408" Column="7" />
-      <File FileName="Assets\MolObject.cs" Line="116" Column="3" />
+      <File FileName="Assets\MainScript.cs" Line="672" Column="5" />
+      <File FileName="Assets\MolObject.cs" Line="167" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
